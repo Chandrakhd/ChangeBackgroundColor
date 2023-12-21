@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
 function App() {
+  let color = "orange";
+  const [currentBg, setNewBg] = useState(color);
+  const [name, setName] = useState("Bg Change");
+
+  const updateBg = () => {
+    let red = Math.floor(Math.random() * 255).toString(16);
+    let green = Math.floor(Math.random() * 255).toString(16);
+    let blue = Math.floor(Math.random() * 255).toString(16);
+
+    let randomColor = `#${red}${green}${blue}`;
+
+    setNewBg(randomColor);
+  };
+  const backOriginal = () => {
+    setNewBg(color);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="wrapper" style={{ backgroundColor: currentBg }}>
+      <div className="container">
+        <p className="bgcolorName">{currentBg.toUpperCase()}</p>
+        <button className="bgChangeBtn" onClick={updateBg}>
+          {name}
+        </button>
+      </div>
     </div>
   );
 }
-
 export default App;
